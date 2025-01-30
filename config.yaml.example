@@ -1,0 +1,40 @@
+# Конфигурация LLM
+llm:
+  api_key: "your-api-key-here"
+  model: "gpt-4"
+  temperature: 0.7
+  max_tokens: 2000
+
+# Конфигурация Kubernetes
+kubernetes:
+  config_path: "~/.kube/config"
+  context: "default"
+  namespace: "default"
+
+# Настройки уведомлений
+notifications:
+  enabled: true
+  
+  # Настройки Telegram
+  telegram:
+    enabled: true
+    token: "your-telegram-bot-token"
+    chat_id: "your-chat-id"
+  
+  # Настройки Slack
+  slack:
+    enabled: true
+    token: "your-slack-token"
+    channel: "#notifications"
+
+# Настройки логирования
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "app.log"
+
+# Настройки базы данных
+database:
+  path: "history.db"
+  backup_enabled: true
+  backup_interval: 86400  # 24 часа в секундах 

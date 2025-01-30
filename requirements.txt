@@ -1,0 +1,6 @@
+pyyaml
+pyzmq
+kubernetes
+aiohttp
+python-telegram-bot
+slack-sdk 

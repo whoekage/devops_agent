@@ -1,0 +1,61 @@
+# Virtual environment
+venv/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs
+logs/
+*.log
+
+# Database
+*.db
+
+# IDE
+.idea/
+.vscode/
+
+# Операционная система
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Пакетные менеджеры
+# pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyInstaller
+# Сгенерированные файлы
+dist/
+build/
+*.spec
+
+# Тестовые файлы
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Виртуальные машины
+.vagrant/
+
+# Контейнеры
+Dockerfile
+docker-compose.yml
+
+# Другие
+*.swp
+*.swo 

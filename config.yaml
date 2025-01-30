@@ -1,0 +1,45 @@
+name: Modular Monitoring System
+description: "Модульная система мониторинга"
+zeromq:
+  host: "tcp://127.0.0.1:5555"  # Адрес сервера ZeroMQ
+sqlite:
+  db_path: "history.db"  # База данных
+
+agents:
+  - name: k8s_agent
+    enabled: true
+    llm_prompt: "Analyze Kubernetes data and provide a SHORT list of:
+       1. Critical issues found (if any)
+       2. Specific recommendations
+       3. Required actions
+       Keep the response under 10 lines. Focus only on actionable insights."
+
+llm:
+  enabled: true
+  model: "deepseek-r1:7b"
+  api_url: "http://localhost:11434/api/generate"
+  system_prompt: "You are a Kubernetes expert. Provide ONLY critical findings and specific actions. No explanations or basic concepts. Be direct and concise."
+
+notifications:
+  enabled: true
+  triggers: 
+    - "critical"
+    - "warning"
+  telegram:
+    enabled: false
+    bot_token: "123456789:ABCDEF1234567890"
+    chat_id: "-123456789"
+  slack:
+    enabled: false
+    webhook_url: "https://hooks.slack.com/services/XXX/YYY/ZZZ"
+  email:
+    enabled: false
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    sender_email: "your-email@gmail.com"
+    sender_password: "your-email-password"
+    recipient_email: "recipient@example.com"
+  webhooks:
+    enabled: false
+    urls:
+      - "https://mywebhook.site/12345"
