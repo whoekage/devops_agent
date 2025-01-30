@@ -27,11 +27,8 @@ notifications:
     - "warning"
   telegram:
     enabled: false
-    bot_token: "123456789:ABCDEF1234567890"
-    chat_id: "-123456789"
   slack:
     enabled: false
-    webhook_url: "https://hooks.slack.com/services/XXX/YYY/ZZZ"
   email:
     enabled: false
     smtp_server: "smtp.gmail.com"
