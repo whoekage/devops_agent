@@ -8,17 +8,55 @@ sqlite:
 agents:
   - name: k8s_agent
     enabled: true
-    llm_prompt: "Analyze Kubernetes data and provide a SHORT list of:
-       1. Critical issues found (if any)
-       2. Specific recommendations
-       3. Required actions
-       Keep the response under 10 lines. Focus only on actionable insights."
+    llm_prompt: >
+      Analyze Kubernetes data and provide a SHORT list of:
+      1. Critical issues found (if any)
+      2. Specific recommendations
+      3. Required actions
+
+      Keep the response under 10 lines. Focus only on actionable insights.
+      If a function call is needed, include a JSON-formatted tool call in your answer using the following structure:
+      {
+          "tool_calls": [
+              {
+                  "name": "<function_name>",
+                  "arguments": { ... }
+              }
+          ]
+      }
+      Available functions:
+      - view_pod_logs: Retrieves logs from a pod. Parameters: 
+          - namespace (string)
+          - pod_name (string)
+          - container (string, optional)
+      - add_two_numbers: Adds two numbers. Parameters:
+          - a (integer)
+          - b (integer)
 
 llm:
   enabled: true
-  model: "deepseek-r1:32b"
+  model: "mistral:latest"
   api_url: "http://localhost:11434/api/generate"
-  system_prompt: "You are a Kubernetes expert. Provide ONLY critical findings and specific actions. No explanations or basic concepts. Be direct and concise."
+  system_prompt: >
+      You are a Kubernetes expert. Provide ONLY critical findings and specific actions.
+      No explanations or basic concepts. Be direct and concise.
+      If a function call is required, include a JSON-formatted tool call in your response with the following structure:
+      {
+          "tool_calls": [
+              {
+                  "name": "<function_name>",
+                  "arguments": { ... }
+              }
+          ]
+      }
+      Available functions:
+      - view_pod_logs: Retrieves logs from a pod. Parameters:
+          - namespace (string)
+          - pod_name (string)
+          - container (string, optional)
+      - add_two_numbers: Adds two numbers. Parameters:
+          - a (integer)
+          - b (integer)
 
 notifications:
   enabled: true

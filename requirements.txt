@@ -3,4 +3,5 @@ pyzmq
 kubernetes
 aiohttp
 python-telegram-bot
-slack-sdk 
+slack-sdk
+ollama
