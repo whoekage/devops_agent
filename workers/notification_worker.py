@@ -18,17 +18,23 @@ def start_notification_worker(running_check=lambda: True):
     print("[Notification Worker] Ожидание событий...")
     while running_check():
         try:
-            message = socket.recv_json()
-            print("\nПолучены данные:", message)
-
+            data = socket.recv_json()
+            
+            # Выводим только ответ LLM без технических деталей
+            if data.get('type') == 'llm_response' and 'response' in data:
+                print(f"\n[LLM] Analysis: {data['response']}")
+            else:
+                # Для остальных сообщений выводим только основную информацию
+                print(f"Получены данные: {data}")
+                
             # Определяем severity на основе типа события или сообщения
             severity = "info"
-            if "type" in message and message["type"] == "events":
-                if "reason" in message and "failed" in message["reason"].lower():
+            if "type" in data and data["type"] == "events":
+                if "reason" in data and "failed" in data["reason"].lower():
                     severity = "critical"
-                elif "reason" in message and "warning" in message["reason"].lower():
+                elif "reason" in data and "warning" in data["reason"].lower():
                     severity = "warning"
-            notifier.notify(str(message), severity)
+            notifier.notify(str(data), severity)
         except zmq.error.Again:
             continue
         except Exception as e:

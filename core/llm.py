@@ -38,7 +38,7 @@ class LLMProcessor:
                 }
             )
             json_response = response.json()
-            print(f"[LLM] Получен ответ от API: {json_response}")
+            
             
             if "error" in json_response:
                 print(f"[LLM] Ошибка API: {json_response['error']}")
