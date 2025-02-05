@@ -16,7 +16,7 @@ agents:
 
 llm:
   enabled: true
-  model: "deepseek-r1:7b"
+  model: "deepseek-r1:32b"
   api_url: "http://localhost:11434/api/generate"
   system_prompt: "You are a Kubernetes expert. Provide ONLY critical findings and specific actions. No explanations or basic concepts. Be direct and concise."
 

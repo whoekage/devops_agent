@@ -92,9 +92,9 @@ class KubernetesAgent:
             print(f"[K8s Agent] Новое событие: {event_data['message']}")
             self.transport.send(event_data)
 
-    def run(self):
+    def run(self, running_check=lambda: True):
         """Основной цикл работы агента"""
-        while True:
+        while running_check():
             try:
                 self.monitor_cluster()
                 print("[K8s Agent] Ожидание перед следующим запуском...")

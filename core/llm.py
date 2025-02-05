@@ -37,7 +37,19 @@ class LLMProcessor:
                     "stream": False
                 }
             )
-            return response.json()["response"]
+            json_response = response.json()
+            print(f"[LLM] Получен ответ от API: {json_response}")
+            
+            if "error" in json_response:
+                print(f"[LLM] Ошибка API: {json_response['error']}")
+                return f"Ошибка API: {json_response['error']}"
+            
+            if "response" in json_response:
+                return json_response["response"]
+            else:
+                print("[LLM] В ответе отсутствует поле 'response'")
+                return "Ошибка анализа: неверный формат ответа"
+                
         except Exception as e:
             print(f"[LLM] Ошибка при обработке запроса: {str(e)}")
             return "Ошибка анализа"
